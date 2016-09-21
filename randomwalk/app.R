@@ -1,21 +1,24 @@
 #
-# This is a Shiny web application. You can run the application by clicking
-# the 'Run App' button above.
+# Shiny web application that generates a plot of a random walk
+# in one dimension. 
 #
-# Find out more about building applications with Shiny here:
+# Author: Cory Rindlisbacher
 #
-#    http://shiny.rstudio.com/
 #
+
 
 library(shiny)
 
-# Define UI for application that draws a histogram
+# Define UI for application that draws a plot
+# and sets options for plot.
+
 ui <- shinyUI(fluidPage(
    
    # Application title
    titlePanel("Random Walk in 1-Dimension"),
    
-   # Sidebar with a slider input for number of bins 
+   # Sidebar with a numeric input for number of steps and radio
+   # button to choose the variable using different random walks
    sidebarLayout(
       sidebarPanel(
         numericInput(inputId = "num", label = "Number of Steps", value = 100, min = 10,
@@ -31,7 +34,7 @@ ui <- shinyUI(fluidPage(
    )
 ))
 
-# Define server logic required to draw a histogram
+# Define server logic required to render the plot
 server <- shinyServer(function(input, output) {
    
    output$walk <- renderPlot({
